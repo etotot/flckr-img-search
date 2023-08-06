@@ -9,12 +9,14 @@
 import Foundation
 
 // MARK: - Search
+
 struct Search: Codable {
     let photos: Photos
     let stat: String
 }
 
 // MARK: - Photos
+
 struct Photos: Codable {
     let page, pages, perpage: Int
     let photo: [Photo]
@@ -22,6 +24,7 @@ struct Photos: Codable {
 }
 
 // MARK: - Photo
+
 struct Photo: Codable {
     let farm: Int
     let id: String

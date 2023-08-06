@@ -8,15 +8,15 @@
 import Foundation
 
 #if os(iOS) || os(tvOS) || os(watchOS)
-import UIKit
+    import UIKit
 #elseif os(OSX)
-import AppKit
+    import AppKit
 #endif
 
 class ImageSearchViewModel: StateProducer {
     private(set) var state: ImgSearch.State {
         didSet {
-            guard let consumer = consumer else {
+            guard let consumer else {
                 return
             }
 
@@ -28,7 +28,7 @@ class ImageSearchViewModel: StateProducer {
 
     private weak var consumer: AnyStateConsumer<ImgSearch.State>? {
         didSet {
-            guard let consumer = consumer else {
+            guard let consumer else {
                 return
             }
 
@@ -102,7 +102,7 @@ class ImageSearchViewModel: StateProducer {
         self.consumer = consumer.toAnyStateConsumer()
     }
 
-    func remove<C>(consumer: C) where C: StateConsumer, ImgSearch.State == C.State {
-        self.consumer = nil
+    func remove<C>(consumer _: C) where C: StateConsumer, ImgSearch.State == C.State {
+        consumer = nil
     }
 }

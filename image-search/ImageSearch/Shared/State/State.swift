@@ -36,7 +36,7 @@ protocol StateConsumer: AnyObject {
 
 extension StateConsumer {
     func toAnyStateConsumer() -> AnyStateConsumer<State> {
-        return .init(consumer: self)
+        .init(consumer: self)
     }
 }
 

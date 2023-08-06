@@ -34,7 +34,7 @@ class URLSessionApiService: ApiService {
         return try decoder.decode(E.Success.self, from: data)
     }
 
-    func prepareRequest<E: Endpoint>(for endpoint: E) throws -> URLRequest {
+    func prepareRequest(for endpoint: some Endpoint) throws -> URLRequest {
         guard let url = endpoint.urlComponents.url(relativeTo: baseURL) else {
             throw Error.invalidRequest(endpoint)
         }
