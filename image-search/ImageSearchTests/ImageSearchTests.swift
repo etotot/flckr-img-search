@@ -27,6 +27,7 @@ final class ImageSearchTests: XCTestCase {
         let mockApiService = ApiServiceMock(responses: [:])
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
+            searchHistoryService: .init(),
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
         let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
@@ -61,6 +62,7 @@ final class ImageSearchTests: XCTestCase {
 
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
+            searchHistoryService: .init(),
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
         let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
@@ -93,6 +95,7 @@ final class ImageSearchTests: XCTestCase {
 
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
+            searchHistoryService: .init(),
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
         let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
@@ -130,6 +133,7 @@ final class ImageSearchTests: XCTestCase {
         let mockStateProducer = MockStateProducer<String>()
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
+            searchHistoryService: .init(),
             queryStateProducer: mockStateProducer
         )
         let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)

@@ -123,6 +123,20 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+
+        guard case ImgSearch.Sections.history = section else {
+            return
+        }
+
+        guard case let ImgSearch.Items.query(query) = snapshot.itemIdentifiers(inSection: section)[indexPath.row] else {
+            return
+        }
+
+        Task {
+            await viewModel?.search(query: query)
+        }
     }
 
     // MARK: - Layout Helpers

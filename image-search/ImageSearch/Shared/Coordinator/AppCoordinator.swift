@@ -28,6 +28,7 @@ class AppCoordinator {
 
         viewController.viewModel = .init(
             apiService: apiService,
+            searchHistoryService: .init(),
             queryStateProducer: SearchBarStateProducer(searchBar: searchBar)
         )
 

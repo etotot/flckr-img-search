@@ -28,26 +28,34 @@ class ImageSearchViewModel: StateProducer, StateConsumer {
     lazy var state: AsyncStream<ImgSearch.State> = {
         let stream = AsyncStream<ImgSearch.State> { continuation in
             _continuation = continuation
+            _continuation?.yield(_state)
         }
 
         return stream
     }()
 
     private(set) var apiService: ApiService
+    private(set) var searchHistoryService: SearchHistoryService
 
     private var queryStateProducer: any StateProducer
     private var queryObservation: Task<Void, Error>?
 
-    init<S: StateProducer>(apiService: ApiService, queryStateProducer: S) where S.State == String {
+    init<S: StateProducer>(
+        apiService: ApiService,
+        searchHistoryService: SearchHistoryService,
+        queryStateProducer: S
+    ) where S.State == String {
         self.apiService = apiService
+        self.searchHistoryService = searchHistoryService
 
         var snapshot = ImgSearch.State.SnapshotType()
         snapshot.appendSections([.history, .photos])
+        snapshot.appendItems(searchHistoryService.queries.map { .query($0) }, toSection: .history)
 
-        _state = .initial(snapshot: snapshot, context: .init(query: nil, hasMore: true, page: 0))
+        self._state = .initial(snapshot: snapshot, context: .init(query: nil, hasMore: true, page: 0))
 
         self.queryStateProducer = queryStateProducer
-        queryObservation = Task { [unowned self] in
+        self.queryObservation = Task { [unowned self] in
             for try await query in queryStateProducer.state.debounce(for: .seconds(0.5)) {
                 await self.search(query: query)
             }
@@ -87,6 +95,7 @@ class ImageSearchViewModel: StateProducer, StateConsumer {
         loadTask?.cancel()
 
         let state = _state.toLoading(query: query)
+        self._state = state
 
         loadTask = Task {
             do {
@@ -101,6 +110,8 @@ class ImageSearchViewModel: StateProducer, StateConsumer {
                 var snapshot = State.SnapshotType()
                 snapshot.appendSections([.photos])
                 snapshot.appendItems(result.photos.photo.map { ImgSearch.Items.photo($0) })
+
+                searchHistoryService.insert(query: query)
 
                 _state = state.toLoaded(
                     snapshot: snapshot,
