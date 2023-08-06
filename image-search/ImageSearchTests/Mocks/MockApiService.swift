@@ -9,9 +9,9 @@
 import Foundation
 
 final class ApiServiceMock: ApiService {
-    
+
     // MARK: - call<E: Endpoint>
-    
+
     var callThrowableError: Error?
     var callCallsCount = 0
     var callCalled: Bool {
@@ -20,18 +20,18 @@ final class ApiServiceMock: ApiService {
 
     var callReceivedEndpoint: (any Endpoint)?
     var callReceivedInvocations: [any Endpoint] = []
-    
+
     enum Response {
         case data(Data)
         case error(Error)
     }
-    
+
     var responses: [String: Response]
-    
+
     init(responses: [String: Response]) {
         self.responses = responses
     }
-    
+
     func call<E: Endpoint>(_ endpoint: E) async throws -> E.Success {
         if let error = callThrowableError {
             throw error
@@ -39,11 +39,11 @@ final class ApiServiceMock: ApiService {
         callCallsCount += 1
         callReceivedEndpoint = endpoint
         callReceivedInvocations.append(endpoint)
-        
+
         guard let response = responses[endpoint.path] else {
             throw URLSessionApiService.Error.invalidRequest(endpoint)
         }
-        
+
         switch response {
         case .data(let data):
             return try JSONDecoder().decode(E.Success.self, from: data)

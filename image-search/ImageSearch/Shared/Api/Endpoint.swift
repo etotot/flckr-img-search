@@ -14,7 +14,7 @@ enum HTTPMethod: String {
 /// Any endpoint that can be used to call remote service and receive decodable response
 protocol Endpoint {
     associatedtype Success: Decodable
-    
+
     var path: String { get }
     var query: [URLQueryItem]? { get }
     var method: HTTPMethod { get }

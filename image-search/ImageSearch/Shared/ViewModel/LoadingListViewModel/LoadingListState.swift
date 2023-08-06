@@ -21,16 +21,16 @@ enum LoadingListState<
     ItemIdentifier: Hashable,
     Context: LoadingListContext,
     Error: Swift.Error
-> {
+>: State {
     typealias SnapshotType = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>
-    
+
     case initial(snapshot: SnapshotType, context: Context)
     case loading(snapshot: SnapshotType, context: Context)
     case loaded(snapshot: SnapshotType, context: Context)
     case error(snapshot: SnapshotType, context: Context, error: Error)
-    
+
     // MARK: - Getters
-    
+
     var snapshot: SnapshotType {
         switch self {
         case .initial(let snapshot, _):
@@ -43,7 +43,7 @@ enum LoadingListState<
             return snapshot
         }
     }
-    
+
     var context: Context {
         switch self {
         case .initial(_, let context):
@@ -56,25 +56,29 @@ enum LoadingListState<
             return context
         }
     }
-    
+
     // MARK: - State Transitions
-    
+
     func reset(context: Context) -> Self {
         reset(snapshot: .init(), context: context)
     }
-    
+
     func reset(snapshot: SnapshotType, context: Context) -> Self {
         .initial(snapshot: snapshot, context: context)
     }
-    
+
+    func toLoading(context: Context) -> Self {
+        .loading(snapshot: snapshot, context: context)
+    }
+
     func toLoading(snapshot: SnapshotType, context: Context) -> Self {
         .loading(snapshot: snapshot, context: context)
     }
-    
+
     func toLoaded(snapshot: SnapshotType, context: Context) -> Self {
         .loaded(snapshot: snapshot, context: context)
     }
-    
+
     func toError(error: Error) -> Self {
         .error(snapshot: snapshot, context: context, error: error)
     }
