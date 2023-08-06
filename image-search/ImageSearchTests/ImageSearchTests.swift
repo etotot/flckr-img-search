@@ -10,12 +10,6 @@ import ConcurrencyExtras
 import XCTest
 
 final class ImageSearchTests: XCTestCase {
-    override func invokeTest() {
-        withMainSerialExecutor {
-            super.invokeTest()
-        }
-    }
-
     func testInitial() async throws {
         let searchHistory = [
             "Item 0",
@@ -30,15 +24,24 @@ final class ImageSearchTests: XCTestCase {
             searchHistoryService: .init(),
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
-        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
-        await Task.yield()
 
-        let updateToCallsCount = mockStateConsumer.updateToCallsCount
-        XCTAssertEqual(updateToCallsCount, 1)
+        let task = Task {
+            let spy = StateConsumerSpy<ImgSearch.State>()
 
-        let lastState = try XCTUnwrap(mockStateConsumer.updateToReceivedNewState)
-        guard case let ImgSearch.State.initial(snapshot, context) = lastState else {
-            XCTFail("Invalid state. Expected ImgSearch.State.error. Got: \(lastState)")
+            for await state in viewModel.state {
+                spy.consume(state: state)
+
+                if case ImgSearch.State.initial = state { break }
+            }
+
+            return spy
+        }
+
+        let spy = await task.value
+
+        let state = try XCTUnwrap(spy.updateToReceivedNewState)
+        guard case let ImgSearch.State.initial(snapshot, context) = state else {
+            XCTFail("Invalid state. Expected ImgSearch.State.error. Got: \(state)")
             return
         }
 
@@ -65,18 +68,27 @@ final class ImageSearchTests: XCTestCase {
             searchHistoryService: .init(),
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
-        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
+
+        let task = Task {
+            let spy = StateConsumerSpy<ImgSearch.State>()
+
+            for await state in viewModel.state {
+                spy.consume(state: state)
+                if case ImgSearch.State.loaded = state { break }
+            }
+
+            return spy
+        }
 
         let query = "Test query"
         await viewModel.search(query: query)
-        await Task.yield()
 
-        let updateToCallsCount = mockStateConsumer.updateToCallsCount
-        XCTAssertEqual(updateToCallsCount, 2)
+        let spy = await task.value
+        XCTAssertEqual(spy.updateToCallsCount, 3)
 
-        let lastState = try XCTUnwrap(mockStateConsumer.updateToReceivedNewState)
-        guard case let ImgSearch.State.loaded(snapshot, context) = lastState else {
-            XCTFail("Invalid state. Expected ImgSearch.State.loaded. Got: \(lastState)")
+        let state = try XCTUnwrap(spy.updateToReceivedNewState)
+        guard case let ImgSearch.State.loaded(snapshot, context) = state else {
+            XCTFail("Invalid state. Expected ImgSearch.State.loaded. Got: \(state)")
             return
         }
 
@@ -84,7 +96,8 @@ final class ImageSearchTests: XCTestCase {
         XCTAssertEqual(context.page, 1)
         XCTAssertEqual(context.hasMore, false)
 
-        XCTAssertEqual(snapshot.numberOfSections, 1)
+        XCTAssertEqual(snapshot.numberOfSections, 2)
+        XCTAssertEqual(snapshot.numberOfItems(inSection: .history), 0)
         XCTAssertEqual(snapshot.numberOfItems(inSection: .photos), 2)
     }
 
@@ -98,18 +111,27 @@ final class ImageSearchTests: XCTestCase {
             searchHistoryService: .init(),
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
-        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
+
+        let task = Task {
+            let spy = StateConsumerSpy<ImgSearch.State>()
+
+            for await state in viewModel.state {
+                spy.consume(state: state)
+                if case ImgSearch.State.error = state { break }
+            }
+
+            return spy
+        }
 
         let query = "Test query"
         await viewModel.search(query: query)
-        await Task.yield()
 
-        let updateToCallsCount = mockStateConsumer.updateToCallsCount
-        XCTAssertEqual(updateToCallsCount, 2)
+        let spy = await task.value
+        XCTAssertEqual(spy.updateToCallsCount, 3)
 
-        let lastState = try XCTUnwrap(mockStateConsumer.updateToReceivedNewState)
-        guard case let ImgSearch.State.error(snapshot, context, error) = lastState else {
-            XCTFail("Invalid state. Expected ImgSearch.State.error. Got: \(lastState)")
+        let state = try XCTUnwrap(spy.updateToReceivedNewState)
+        guard case let ImgSearch.State.error(snapshot, context, error) = state else {
+            XCTFail("Invalid state. Expected ImgSearch.State.error. Got: \(state)")
             return
         }
 
@@ -136,18 +158,27 @@ final class ImageSearchTests: XCTestCase {
             searchHistoryService: .init(),
             queryStateProducer: mockStateProducer
         )
-        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
+
+        let task = Task {
+            let spy = StateConsumerSpy<ImgSearch.State>()
+
+            for await state in viewModel.state {
+                spy.consume(state: state)
+                if case ImgSearch.State.loaded = state { break }
+            }
+
+            return spy
+        }
 
         let query = "query"
         await mockStateProducer.send(state: query)
-        await Task.yield()
 
-        let updateToCallsCount = mockStateConsumer.updateToCallsCount
-        XCTAssertEqual(updateToCallsCount, 2)
+        let spy = await task.value
+        XCTAssertEqual(spy.updateToCallsCount, 3)
 
-        let lastState = try XCTUnwrap(mockStateConsumer.updateToReceivedNewState)
-        guard case let ImgSearch.State.loaded(snapshot, context) = lastState else {
-            XCTFail("Invalid state. Expected ImgSearch.State.loaded. Got: \(lastState)")
+        let state = try XCTUnwrap(spy.updateToReceivedNewState)
+        guard case let ImgSearch.State.loaded(snapshot, context) = state else {
+            XCTFail("Invalid state. Expected ImgSearch.State.loaded. Got: \(state)")
             return
         }
 
@@ -155,7 +186,8 @@ final class ImageSearchTests: XCTestCase {
         XCTAssertEqual(context.page, 1)
         XCTAssertEqual(context.hasMore, false)
 
-        XCTAssertEqual(snapshot.numberOfSections, 1)
+        XCTAssertEqual(snapshot.numberOfSections, 2)
+        XCTAssertEqual(snapshot.numberOfItems(inSection: .history), 0)
         XCTAssertEqual(snapshot.numberOfItems(inSection: .photos), 2)
 
     }

@@ -35,6 +35,7 @@ final class ApiServiceMock: ApiService {
         if let error = callThrowableError {
             throw error
         }
+
         callCallsCount += 1
         callReceivedEndpoint = endpoint
         callReceivedInvocations.append(endpoint)

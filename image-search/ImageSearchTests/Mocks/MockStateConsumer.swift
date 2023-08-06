@@ -8,7 +8,7 @@
 import Foundation
 @testable import ImageSearch
 
-final class StateConsumerMock<State: ImageSearch.State>: StateConsumer {
+final class StateConsumerSpy<State: ImageSearch.State> {
     var updateToCallsCount = 0
     var updateToCalled: Bool {
         updateToCallsCount > 0
@@ -17,15 +17,9 @@ final class StateConsumerMock<State: ImageSearch.State>: StateConsumer {
     var updateToReceivedNewState: State?
     var updateToReceivedInvocations: [State] = []
 
-    private var task: Task<Void, Error>?
-
-    init<S: StateProducer>(_ stateProducer: S) where S.State == State {
-        task = Task {
-            for try await state in stateProducer.state {
-                updateToCallsCount += 1
-                updateToReceivedNewState = state
-                updateToReceivedInvocations.append(state)
-            }
-        }
+    func consume(state: State) {
+        updateToCallsCount += 1
+        updateToReceivedNewState = state
+        updateToReceivedInvocations.append(state)
     }
 }
