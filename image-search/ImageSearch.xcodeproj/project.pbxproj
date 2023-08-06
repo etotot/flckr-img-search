@@ -33,6 +33,7 @@
 		0FFCF4E32A8034DC00966B55 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0FFCF4E22A8034DC00966B55 /* NukeUI */; };
 		0FFCF4E52A80350100966B55 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E42A80350100966B55 /* PhotoCollectionViewCell.swift */; };
 		0FFCF4E82A803F5200966B55 /* SearchBarStateProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */; };
+		0FFCF4EA2A8042DD00966B55 /* MockStateProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		0FFCF4DD2A80340100966B55 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
 		0FFCF4E42A80350100966B55 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarStateProducer.swift; sourceTree = "<group>"; };
+		0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStateProducer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 			children = (
 				0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */,
 				0FFCF4D02A801B8D00966B55 /* MockStateConsumer.swift */,
+				0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FFCF4CD2A800EA300966B55 /* MockApiService.swift in Sources */,
+				0FFCF4EA2A8042DD00966B55 /* MockStateProducer.swift in Sources */,
 				0FFCF4D12A801B8D00966B55 /* MockStateConsumer.swift in Sources */,
 				0FFCF4982A7FFE8900966B55 /* ImageSearchTests.swift in Sources */,
 			);

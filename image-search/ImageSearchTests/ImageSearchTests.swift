@@ -25,7 +25,10 @@ final class ImageSearchTests: XCTestCase {
         ]
 
         let mockApiService = ApiServiceMock(responses: [:])
-        let viewModel = ImageSearchViewModel(apiService: mockApiService)
+        let viewModel = ImageSearchViewModel(
+            apiService: mockApiService,
+            queryStateProducer: MockStreamStateProducer<String>(state: .never)
+        )
         let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
         await Task.yield()
 
@@ -56,7 +59,10 @@ final class ImageSearchTests: XCTestCase {
             "services/rest": .data(data),
         ])
 
-        let viewModel = ImageSearchViewModel(apiService: mockApiService)
+        let viewModel = ImageSearchViewModel(
+            apiService: mockApiService,
+            queryStateProducer: MockStreamStateProducer<String>(state: .never)
+        )
         let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
 
         let query = "Test query"
@@ -85,7 +91,10 @@ final class ImageSearchTests: XCTestCase {
             "services/rest": .error(ImgSearch.Error.loadFailed),
         ])
 
-        let viewModel = ImageSearchViewModel(apiService: mockApiService)
+        let viewModel = ImageSearchViewModel(
+            apiService: mockApiService,
+            queryStateProducer: MockStreamStateProducer<String>(state: .never)
+        )
         let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
 
         let query = "Test query"
@@ -107,5 +116,43 @@ final class ImageSearchTests: XCTestCase {
         XCTAssertEqual(snapshot.numberOfSections, 2)
         XCTAssertEqual(snapshot.numberOfItems(inSection: .history), 0)
         XCTAssertEqual(snapshot.numberOfItems(inSection: .photos), 0)
+    }
+
+    func testSearch() async throws {
+        let bundle = Bundle(for: ImageSearchTests.self)
+        let path = bundle.url(forResource: "search", withExtension: "json")!
+        let data = try Data(contentsOf: path)
+
+        let mockApiService = ApiServiceMock(responses: [
+            "services/rest": .data(data),
+        ])
+
+        let mockStateProducer = MockStateProducer<String>()
+        let viewModel = ImageSearchViewModel(
+            apiService: mockApiService,
+            queryStateProducer: mockStateProducer
+        )
+        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
+
+        let query = "query"
+        await mockStateProducer.send(state: query)
+        await Task.yield()
+
+        let updateToCallsCount = mockStateConsumer.updateToCallsCount
+        XCTAssertEqual(updateToCallsCount, 2)
+
+        let lastState = try XCTUnwrap(mockStateConsumer.updateToReceivedNewState)
+        guard case let ImgSearch.State.loaded(snapshot, context) = lastState else {
+            XCTFail("Invalid state. Expected ImgSearch.State.loaded. Got: \(lastState)")
+            return
+        }
+
+        XCTAssertEqual(context.query, query)
+        XCTAssertEqual(context.page, 1)
+        XCTAssertEqual(context.hasMore, false)
+
+        XCTAssertEqual(snapshot.numberOfSections, 1)
+        XCTAssertEqual(snapshot.numberOfItems(inSection: .photos), 2)
+
     }
 }

@@ -19,12 +19,17 @@ class AppCoordinator {
         let apiService = URLSessionApiService(baseURL: URL(string: "https://www.flickr.com")!)
 
         let viewController = ImageSearchViewController()
-        viewController.viewModel = .init(apiService: apiService)
+
         navigationController.pushViewController(viewController, animated: false)
 
         let searchBar = UISearchBar()
         viewController.navigationItem.titleView = searchBar
         viewController.title = "Image Search"
+
+        viewController.viewModel = .init(
+            apiService: apiService,
+            queryStateProducer: SearchBarStateProducer(searchBar: searchBar)
+        )
 
         self.imageSearchViewController = viewController
     }
