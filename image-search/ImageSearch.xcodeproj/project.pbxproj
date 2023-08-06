@@ -16,13 +16,17 @@
 		0FFCF4A42A7FFE8900966B55 /* ImageSearchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4A32A7FFE8900966B55 /* ImageSearchUITestsLaunchTests.swift */; };
 		0FFCF4B72A80041900966B55 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4B62A80041900966B55 /* Model.swift */; };
 		0FFCF4BA2A8004C100966B55 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4B92A8004C100966B55 /* State.swift */; };
-		0FFCF4BE2A8006AC00966B55 /* LoadingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4BD2A8006AC00966B55 /* LoadingListViewModel.swift */; };
+		0FFCF4BE2A8006AC00966B55 /* ImageSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4BD2A8006AC00966B55 /* ImageSearchViewModel.swift */; };
 		0FFCF4C02A8006B800966B55 /* LoadingListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4BF2A8006B800966B55 /* LoadingListState.swift */; };
 		0FFCF4C32A8008FA00966B55 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C22A8008FA00966B55 /* Endpoint.swift */; };
 		0FFCF4C52A80091100966B55 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C42A80091100966B55 /* ApiService.swift */; };
 		0FFCF4C72A80092B00966B55 /* URLSessionApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C62A80092B00966B55 /* URLSessionApiService.swift */; };
 		0FFCF4C92A8009BF00966B55 /* FlickrEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C82A8009BF00966B55 /* FlickrEndpoint.swift */; };
 		0FFCF4CD2A800EA300966B55 /* MockApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */; };
+		0FFCF4CF2A80144000966B55 /* ImageSearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4CE2A80144000966B55 /* ImageSearchState.swift */; };
+		0FFCF4D12A801B8D00966B55 /* MockStateConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4D02A801B8D00966B55 /* MockStateConsumer.swift */; };
+		0FFCF4D42A801E9800966B55 /* ConcurrencyExtras in Frameworks */ = {isa = PBXBuildFile; productRef = 0FFCF4D32A801E9800966B55 /* ConcurrencyExtras */; };
+		0FFCF4D72A802A3700966B55 /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FFCF4D62A802A3700966B55 /* search.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,13 +60,16 @@
 		0FFCF4A32A7FFE8900966B55 /* ImageSearchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0FFCF4B62A80041900966B55 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0FFCF4B92A8004C100966B55 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		0FFCF4BD2A8006AC00966B55 /* LoadingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingListViewModel.swift; sourceTree = "<group>"; };
+		0FFCF4BD2A8006AC00966B55 /* ImageSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewModel.swift; sourceTree = "<group>"; };
 		0FFCF4BF2A8006B800966B55 /* LoadingListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingListState.swift; sourceTree = "<group>"; };
 		0FFCF4C22A8008FA00966B55 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0FFCF4C42A80091100966B55 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		0FFCF4C62A80092B00966B55 /* URLSessionApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionApiService.swift; sourceTree = "<group>"; };
 		0FFCF4C82A8009BF00966B55 /* FlickrEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrEndpoint.swift; sourceTree = "<group>"; };
 		0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiService.swift; sourceTree = "<group>"; };
+		0FFCF4CE2A80144000966B55 /* ImageSearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchState.swift; sourceTree = "<group>"; };
+		0FFCF4D02A801B8D00966B55 /* MockStateConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStateConsumer.swift; sourceTree = "<group>"; };
+		0FFCF4D62A802A3700966B55 /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFCF4D42A801E9800966B55 /* ConcurrencyExtras in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +135,7 @@
 		0FFCF4962A7FFE8900966B55 /* ImageSearchTests */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF4D52A802A2200966B55 /* Resources */,
 				0FFCF4CC2A800E4B00966B55 /* Mocks */,
 				0FFCF4972A7FFE8900966B55 /* ImageSearchTests.swift */,
 			);
@@ -153,6 +162,8 @@
 		0FFCF4B12A7FFEF300966B55 /* ImageSearch */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF4CE2A80144000966B55 /* ImageSearchState.swift */,
+				0FFCF4BD2A8006AC00966B55 /* ImageSearchViewModel.swift */,
 			);
 			path = ImageSearch;
 			sourceTree = "<group>";
@@ -196,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				0FFCF4BF2A8006B800966B55 /* LoadingListState.swift */,
-				0FFCF4BD2A8006AC00966B55 /* LoadingListViewModel.swift */,
 			);
 			path = LoadingListViewModel;
 			sourceTree = "<group>";
@@ -205,9 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				0FFCF4C22A8008FA00966B55 /* Endpoint.swift */,
-				0FFCF4C82A8009BF00966B55 /* FlickrEndpoint.swift */,
 				0FFCF4C42A80091100966B55 /* ApiService.swift */,
 				0FFCF4C62A80092B00966B55 /* URLSessionApiService.swift */,
+				0FFCF4C82A8009BF00966B55 /* FlickrEndpoint.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -216,8 +226,17 @@
 			isa = PBXGroup;
 			children = (
 				0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */,
+				0FFCF4D02A801B8D00966B55 /* MockStateConsumer.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0FFCF4D52A802A2200966B55 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0FFCF4D62A802A3700966B55 /* search.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +274,9 @@
 				0FFCF4952A7FFE8900966B55 /* PBXTargetDependency */,
 			);
 			name = ImageSearchTests;
+			packageProductDependencies = (
+				0FFCF4D32A801E9800966B55 /* ConcurrencyExtras */,
+			);
 			productName = "image-searchTests";
 			productReference = 0FFCF4932A7FFE8900966B55 /* ImageSearchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -309,6 +331,9 @@
 				Base,
 			);
 			mainGroup = 0FFCF4742A7FFE8800966B55;
+			packageReferences = (
+				0FFCF4D22A801E9800966B55 /* XCRemoteSwiftPackageReference "swift-concurrency-extras" */,
+			);
 			productRefGroup = 0FFCF47E2A7FFE8800966B55 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -334,6 +359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFCF4D72A802A3700966B55 /* search.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +407,8 @@
 				0FFCF4C72A80092B00966B55 /* URLSessionApiService.swift in Sources */,
 				0FFCF4BA2A8004C100966B55 /* State.swift in Sources */,
 				0FFCF4C52A80091100966B55 /* ApiService.swift in Sources */,
-				0FFCF4BE2A8006AC00966B55 /* LoadingListViewModel.swift in Sources */,
+				0FFCF4BE2A8006AC00966B55 /* ImageSearchViewModel.swift in Sources */,
+				0FFCF4CF2A80144000966B55 /* ImageSearchState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FFCF4CD2A800EA300966B55 /* MockApiService.swift in Sources */,
+				0FFCF4D12A801B8D00966B55 /* MockStateConsumer.swift in Sources */,
 				0FFCF4982A7FFE8900966B55 /* ImageSearchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,6 +744,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0FFCF4D22A801E9800966B55 /* XCRemoteSwiftPackageReference "swift-concurrency-extras" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-concurrency-extras";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0FFCF4D32A801E9800966B55 /* ConcurrencyExtras */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0FFCF4D22A801E9800966B55 /* XCRemoteSwiftPackageReference "swift-concurrency-extras" */;
+			productName = ConcurrencyExtras;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0FFCF4752A7FFE8800966B55 /* Project object */;
 }

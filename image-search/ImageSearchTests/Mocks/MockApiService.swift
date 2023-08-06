@@ -5,11 +5,10 @@
 //  Created by andrey.marshak on 06.08.2023.
 //
 
-@testable import ImageSearch
 import Foundation
+@testable import ImageSearch
 
 final class ApiServiceMock: ApiService {
-
     // MARK: - call<E: Endpoint>
 
     var callThrowableError: Error?
@@ -45,9 +44,9 @@ final class ApiServiceMock: ApiService {
         }
 
         switch response {
-        case .data(let data):
+        case let .data(data):
             return try JSONDecoder().decode(E.Success.self, from: data)
-        case .error(let error):
+        case let .error(error):
             throw error
         }
     }

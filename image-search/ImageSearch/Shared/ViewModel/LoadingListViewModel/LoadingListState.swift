@@ -7,9 +7,9 @@
 
 import Foundation
 #if os(iOS) || os(tvOS) || os(watchOS)
-import UIKit
+    import UIKit
 #elseif os(OSX)
-import AppKit
+    import AppKit
 #endif
 
 protocol LoadingListContext {
@@ -33,26 +33,26 @@ enum LoadingListState<
 
     var snapshot: SnapshotType {
         switch self {
-        case .initial(let snapshot, _):
+        case let .initial(snapshot, _):
             return snapshot
-        case .loading(let snapshot, _):
+        case let .loading(snapshot, _):
             return snapshot
-        case .loaded(let snapshot, _):
+        case let .loaded(snapshot, _):
             return snapshot
-        case .error(let snapshot, _, _):
+        case let .error(snapshot, _, _):
             return snapshot
         }
     }
 
     var context: Context {
         switch self {
-        case .initial(_, let context):
+        case let .initial(_, context):
             return context
-        case .loading(_, let context):
+        case let .loading(_, context):
             return context
-        case .loaded(_, let context):
+        case let .loaded(_, context):
             return context
-        case .error(_, let context, _):
+        case let .error(_, context, _):
             return context
         }
     }

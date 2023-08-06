@@ -1,0 +1,30 @@
+{
+    "photos": {
+        "page": 1,
+        "pages": 1,
+        "perpage": 2,
+        "total": 95489,
+        "photo": [{
+            "id": "53097336257",
+            "owner": "23835356@N00",
+            "secret": "af7e9032d5",
+            "server": "65535",
+            "farm": 66,
+            "title": "Bonnie cruising in a test drive",
+            "ispublic": 1,
+            "isfriend": 0,
+            "isfamily": 0
+        }, {
+            "id": "53098088794",
+            "owner": "198673242@N08",
+            "secret": "cf01e6a968",
+            "server": "65535",
+            "farm": 66,
+            "title": "test photo-68.jpg",
+            "ispublic": 1,
+            "isfriend": 0,
+            "isfamily": 0
+        }]
+    },
+    "stat": "ok"
+}

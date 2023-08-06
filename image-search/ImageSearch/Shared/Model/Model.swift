@@ -28,3 +28,5 @@ struct Photo: Codable {
     let isfamily, isfriend, ispublic: Int
     let owner, secret, server, title: String
 }
+
+extension Photo: Hashable {}
