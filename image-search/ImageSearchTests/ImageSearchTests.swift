@@ -25,10 +25,9 @@ final class ImageSearchTests: XCTestCase {
         ]
 
         let mockApiService = ApiServiceMock(responses: [:])
-        let mockStateConsumer = StateConsumerMock<ImgSearch.State>()
-
         let viewModel = ImageSearchViewModel(apiService: mockApiService)
-        viewModel.add(consumer: mockStateConsumer)
+        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
+        await Task.yield()
 
         let updateToCallsCount = mockStateConsumer.updateToCallsCount
         XCTAssertEqual(updateToCallsCount, 1)
@@ -57,10 +56,8 @@ final class ImageSearchTests: XCTestCase {
             "services/rest": .data(data),
         ])
 
-        let mockStateConsumer = StateConsumerMock<ImgSearch.State>()
-
         let viewModel = ImageSearchViewModel(apiService: mockApiService)
-        viewModel.add(consumer: mockStateConsumer)
+        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
 
         let query = "Test query"
         await viewModel.search(query: query)
@@ -88,10 +85,8 @@ final class ImageSearchTests: XCTestCase {
             "services/rest": .error(ImgSearch.Error.loadFailed),
         ])
 
-        let mockStateConsumer = StateConsumerMock<ImgSearch.State>()
-
         let viewModel = ImageSearchViewModel(apiService: mockApiService)
-        viewModel.add(consumer: mockStateConsumer)
+        let mockStateConsumer = StateConsumerMock<ImgSearch.State>(viewModel)
 
         let query = "Test query"
         await viewModel.search(query: query)

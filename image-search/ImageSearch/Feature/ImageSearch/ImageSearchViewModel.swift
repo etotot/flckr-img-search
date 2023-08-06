@@ -14,29 +14,21 @@ import Foundation
 #endif
 
 class ImageSearchViewModel: StateProducer {
-    private(set) var state: ImgSearch.State {
+    private var _state: ImgSearch.State {
         didSet {
-            guard let consumer else {
-                return
-            }
-
-            Task {
-                await consumer.update(to: state)
-            }
+            _continuation?.yield(_state)
         }
     }
 
-    private weak var consumer: AnyStateConsumer<ImgSearch.State>? {
-        didSet {
-            guard let consumer else {
-                return
-            }
+    private var _continuation: AsyncStream<ImgSearch.State>.Continuation?
 
-            Task {
-                await consumer.update(to: state)
-            }
+    lazy var state: AsyncStream<ImgSearch.State> = {
+        let stream = AsyncStream<ImgSearch.State> { continuation in
+            _continuation = continuation
         }
-    }
+
+        return stream
+    }()
 
     private(set) var apiService: ApiService
 
@@ -46,7 +38,7 @@ class ImageSearchViewModel: StateProducer {
         var snapshot = ImgSearch.State.SnapshotType()
         snapshot.appendSections([.history, .photos])
 
-        state = .initial(snapshot: snapshot, context: .init(query: nil, hasMore: true, page: 0))
+        _state = .initial(snapshot: snapshot, context: .init(query: nil, hasMore: true, page: 0))
     }
 
     // MARK: - Loading
@@ -60,11 +52,11 @@ class ImageSearchViewModel: StateProducer {
     }
 
     func loadNext() async {
-        guard state.context.hasMore, let query = state.context.query else {
+        guard _state.context.hasMore, let query = _state.context.query else {
             return
         }
 
-        await load(query: query, page: state.context.page + 1)
+        await load(query: query, page: _state.context.page + 1)
     }
 
     private func load(query: String, page: Int = 0) async {
@@ -72,7 +64,7 @@ class ImageSearchViewModel: StateProducer {
             return
         }
 
-        let state = state.toLoading(query: query)
+        let state = _state.toLoading(query: query)
 
         do {
             let result = try await apiService.call(
@@ -83,7 +75,7 @@ class ImageSearchViewModel: StateProducer {
             snapshot.appendSections([.photos])
             snapshot.appendItems(result.photos.photo.map { ImgSearch.Items.photo($0) })
 
-            self.state = state.toLoaded(
+            _state = state.toLoaded(
                 snapshot: snapshot,
                 context: .init(
                     query: query,
@@ -92,17 +84,7 @@ class ImageSearchViewModel: StateProducer {
                 )
             )
         } catch {
-            self.state = state.toError(error: .loadFailed)
+            _state = state.toError(error: .loadFailed)
         }
-    }
-
-    // MARK: - StateProducer
-
-    func add<C>(consumer: C) where C: StateConsumer, ImgSearch.State == C.State {
-        self.consumer = consumer.toAnyStateConsumer()
-    }
-
-    func remove<C>(consumer _: C) where C: StateConsumer, ImgSearch.State == C.State {
-        consumer = nil
     }
 }
