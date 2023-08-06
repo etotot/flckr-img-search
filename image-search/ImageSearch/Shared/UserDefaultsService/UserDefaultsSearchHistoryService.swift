@@ -1,5 +1,5 @@
 //
-//  UserDefaultsService.swift
+//  UserDefaultsSearchHistoryService.swift
 //  ImageSearch
 //
 //  Created by andrey.marshak on 07.08.2023.
@@ -7,7 +7,12 @@
 
 import Foundation
 
-class SearchHistoryService {
+protocol SearchHistoryService {
+    var queries: [String] { get }
+    func insert(query: String)
+}
+
+class UserDefaultsSearchHistoryService: SearchHistoryService {
     private static let key = "SearchHistory"
 
     private let defaults = UserDefaults()
@@ -38,7 +43,7 @@ class SearchHistoryService {
     }
 
     private func load() {
-        guard let queries = defaults.array(forKey: SearchHistoryService.key) as? [String] else {
+        guard let queries = defaults.array(forKey: UserDefaultsSearchHistoryService.key) as? [String] else {
             return
         }
 
@@ -46,6 +51,6 @@ class SearchHistoryService {
     }
 
     private func save() {
-        defaults.set(queries, forKey: SearchHistoryService.key)
+        defaults.set(queries, forKey: UserDefaultsSearchHistoryService.key)
     }
 }

@@ -35,8 +35,9 @@
 		0FFCF4E82A803F5200966B55 /* SearchBarStateProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */; };
 		0FFCF4EA2A8042DD00966B55 /* MockStateProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */; };
 		0FFCF4ED2A80458000966B55 /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 0FFCF4EC2A80458000966B55 /* AsyncAlgorithms */; };
-		0FFCF4F02A804A2600966B55 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4EF2A804A2600966B55 /* UserDefaultsService.swift */; };
+		0FFCF4F02A804A2600966B55 /* UserDefaultsSearchHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4EF2A804A2600966B55 /* UserDefaultsSearchHistoryService.swift */; };
 		0FFCF4F32A804F5E00966B55 /* CollectionActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4F22A804F5E00966B55 /* CollectionActivityIndicatorView.swift */; };
+		0FFCF5052A80650E00966B55 /* MockSearchHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF5042A80650E00966B55 /* MockSearchHistoryService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,8 +86,9 @@
 		0FFCF4E42A80350100966B55 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarStateProducer.swift; sourceTree = "<group>"; };
 		0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStateProducer.swift; sourceTree = "<group>"; };
-		0FFCF4EF2A804A2600966B55 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		0FFCF4EF2A804A2600966B55 /* UserDefaultsSearchHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsSearchHistoryService.swift; sourceTree = "<group>"; };
 		0FFCF4F22A804F5E00966B55 /* CollectionActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionActivityIndicatorView.swift; sourceTree = "<group>"; };
+		0FFCF5042A80650E00966B55 /* MockSearchHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchHistoryService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 				0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */,
 				0FFCF4D02A801B8D00966B55 /* MockStateConsumer.swift */,
 				0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */,
+				0FFCF5042A80650E00966B55 /* MockSearchHistoryService.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -285,7 +288,7 @@
 		0FFCF4EE2A804A1500966B55 /* UserDefaultsService */ = {
 			isa = PBXGroup;
 			children = (
-				0FFCF4EF2A804A2600966B55 /* UserDefaultsService.swift */,
+				0FFCF4EF2A804A2600966B55 /* UserDefaultsSearchHistoryService.swift */,
 			);
 			path = UserDefaultsService;
 			sourceTree = "<group>";
@@ -477,7 +480,7 @@
 				0FFCF4BA2A8004C100966B55 /* State.swift in Sources */,
 				0FFCF4DE2A80340100966B55 /* ImageSearchViewController.swift in Sources */,
 				0FFCF4E52A80350100966B55 /* PhotoCollectionViewCell.swift in Sources */,
-				0FFCF4F02A804A2600966B55 /* UserDefaultsService.swift in Sources */,
+				0FFCF4F02A804A2600966B55 /* UserDefaultsSearchHistoryService.swift in Sources */,
 				0FFCF4C52A80091100966B55 /* ApiService.swift in Sources */,
 				0FFCF4BE2A8006AC00966B55 /* ImageSearchViewModel.swift in Sources */,
 				0FFCF4CF2A80144000966B55 /* ImageSearchState.swift in Sources */,
@@ -490,6 +493,7 @@
 			files = (
 				0FFCF4CD2A800EA300966B55 /* MockApiService.swift in Sources */,
 				0FFCF4EA2A8042DD00966B55 /* MockStateProducer.swift in Sources */,
+				0FFCF5052A80650E00966B55 /* MockSearchHistoryService.swift in Sources */,
 				0FFCF4D12A801B8D00966B55 /* MockStateConsumer.swift in Sources */,
 				0FFCF4982A7FFE8900966B55 /* ImageSearchTests.swift in Sources */,
 			);

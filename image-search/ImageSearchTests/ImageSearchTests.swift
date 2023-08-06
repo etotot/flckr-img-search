@@ -11,17 +11,16 @@ import XCTest
 
 final class ImageSearchTests: XCTestCase {
     func testInitial() async throws {
-        let searchHistory = [
+        let mockApiService = ApiServiceMock(responses: [:])
+        let mockSearchHistoryService = SearchHistoryServiceMock(queries: [
             "Item 0",
             "Item 1",
             "Item 2",
             "Item 3",
-        ]
-
-        let mockApiService = ApiServiceMock(responses: [:])
+        ])
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
-            searchHistoryService: .init(),
+            searchHistoryService: mockSearchHistoryService,
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
 
@@ -45,8 +44,10 @@ final class ImageSearchTests: XCTestCase {
             return
         }
 
+        XCTAssertEqual(mockSearchHistoryService.insertQueryCallsCount, 0)
+
         XCTAssertEqual(snapshot.numberOfSections, 2)
-        XCTAssertEqual(snapshot.numberOfItems(inSection: .history), searchHistory.count)
+        XCTAssertEqual(snapshot.numberOfItems(inSection: .history), mockSearchHistoryService.queries.count)
         XCTAssertEqual(snapshot.numberOfItems(inSection: .photos), 0)
 
         XCTAssertEqual(context.query, nil)
@@ -62,10 +63,11 @@ final class ImageSearchTests: XCTestCase {
         let mockApiService = ApiServiceMock(responses: [
             "services/rest": .data(data),
         ])
+        let mockSearchHistoryService = SearchHistoryServiceMock()
 
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
-            searchHistoryService: .init(),
+            searchHistoryService: mockSearchHistoryService,
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
 
@@ -92,6 +94,8 @@ final class ImageSearchTests: XCTestCase {
             return
         }
 
+        XCTAssertEqual(mockSearchHistoryService.insertQueryCallsCount, 1)
+
         XCTAssertEqual(context.query, query)
         XCTAssertEqual(context.page, 1)
         XCTAssertEqual(context.hasMore, false)
@@ -105,10 +109,11 @@ final class ImageSearchTests: XCTestCase {
         let mockApiService = ApiServiceMock(responses: [
             "services/rest": .error(ImgSearch.Error.loadFailed),
         ])
+        let mockSearchHistoryService = SearchHistoryServiceMock()
 
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
-            searchHistoryService: .init(),
+            searchHistoryService: mockSearchHistoryService,
             queryStateProducer: MockStreamStateProducer<String>(state: .never)
         )
 
@@ -135,6 +140,8 @@ final class ImageSearchTests: XCTestCase {
             return
         }
 
+        XCTAssertEqual(mockSearchHistoryService.insertQueryCallsCount, 0)
+
         XCTAssertEqual(context.query, query)
         XCTAssertEqual(error, ImgSearch.Error.loadFailed)
 
@@ -151,11 +158,12 @@ final class ImageSearchTests: XCTestCase {
         let mockApiService = ApiServiceMock(responses: [
             "services/rest": .data(data),
         ])
+        let mockSearchHistoryService = SearchHistoryServiceMock()
 
         let mockStateProducer = MockStateProducer<String>()
         let viewModel = ImageSearchViewModel(
             apiService: mockApiService,
-            searchHistoryService: .init(),
+            searchHistoryService: mockSearchHistoryService,
             queryStateProducer: mockStateProducer
         )
 
@@ -181,6 +189,8 @@ final class ImageSearchTests: XCTestCase {
             XCTFail("Invalid state. Expected ImgSearch.State.loaded. Got: \(state)")
             return
         }
+
+        XCTAssertEqual(mockSearchHistoryService.insertQueryCallsCount, 1)
 
         XCTAssertEqual(context.query, query)
         XCTAssertEqual(context.page, 1)
