@@ -17,11 +17,11 @@ final class StateConsumerMock<State: ImageSearch.State>: StateConsumer {
     var updateToReceivedNewState: State?
     var updateToReceivedInvocations: [State] = []
 
-    private var task: Task<Void, Never>?
+    private var task: Task<Void, Error>?
 
     init<S: StateProducer>(_ stateProducer: S) where S.State == State {
         task = Task {
-            for await state in stateProducer.state {
+            for try await state in stateProducer.state {
                 updateToCallsCount += 1
                 updateToReceivedNewState = state
                 updateToReceivedInvocations.append(state)

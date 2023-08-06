@@ -31,4 +31,3 @@ class MockStateProducer<State: ImageSearch.State>: StateProducer {
         self.continuation?.yield(state)
     }
 }
-

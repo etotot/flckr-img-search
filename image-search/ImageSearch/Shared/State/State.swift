@@ -15,8 +15,9 @@ protocol State {
 /// Type that can produce state updates with given `State`
 protocol StateProducer {
     associatedtype State: ImageSearch.State
+    associatedtype `Sequence`: AsyncSequence where Sequence.Element == State
 
-    var state: AsyncStream<State> { get }
+    var state: Sequence { get }
 }
 
 /// Type that can receive state updates with given `State`

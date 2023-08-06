@@ -101,8 +101,13 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
             let snapshot = newState.snapshot
             dataSource.apply(snapshot)
 
-            if let query = newState.context.query, let searchBar = navigationItem.titleView as? UISearchBar {
-                searchBar.text = query
+            switch newState {
+            case.loading:
+                break
+            default:
+                if let searchBar = navigationItem.titleView as? UISearchBar {
+                    searchBar.text = newState.context.query
+                }
             }
         }
     }
