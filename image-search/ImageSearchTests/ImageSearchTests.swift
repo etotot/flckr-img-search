@@ -5,7 +5,7 @@
 //  Created by andrey.marshak on 06.08.2023.
 //
 
-@testable import image_search
+@testable import ImageSearch
 import XCTest
 
 final class ImageSearchTests: XCTestCase {

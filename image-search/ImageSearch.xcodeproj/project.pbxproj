@@ -16,7 +16,13 @@
 		0FFCF4A42A7FFE8900966B55 /* ImageSearchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4A32A7FFE8900966B55 /* ImageSearchUITestsLaunchTests.swift */; };
 		0FFCF4B72A80041900966B55 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4B62A80041900966B55 /* Model.swift */; };
 		0FFCF4BA2A8004C100966B55 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4B92A8004C100966B55 /* State.swift */; };
+		0FFCF4BE2A8006AC00966B55 /* LoadingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4BD2A8006AC00966B55 /* LoadingListViewModel.swift */; };
 		0FFCF4C02A8006B800966B55 /* LoadingListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4BF2A8006B800966B55 /* LoadingListState.swift */; };
+		0FFCF4C32A8008FA00966B55 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C22A8008FA00966B55 /* Endpoint.swift */; };
+		0FFCF4C52A80091100966B55 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C42A80091100966B55 /* ApiService.swift */; };
+		0FFCF4C72A80092B00966B55 /* URLSessionApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C62A80092B00966B55 /* URLSessionApiService.swift */; };
+		0FFCF4C92A8009BF00966B55 /* FlickrEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4C82A8009BF00966B55 /* FlickrEndpoint.swift */; };
+		0FFCF4CD2A800EA300966B55 /* MockApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +56,13 @@
 		0FFCF4A32A7FFE8900966B55 /* ImageSearchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0FFCF4B62A80041900966B55 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0FFCF4B92A8004C100966B55 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		0FFCF4BD2A8006AC00966B55 /* LoadingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingListViewModel.swift; sourceTree = "<group>"; };
 		0FFCF4BF2A8006B800966B55 /* LoadingListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingListState.swift; sourceTree = "<group>"; };
+		0FFCF4C22A8008FA00966B55 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		0FFCF4C42A80091100966B55 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		0FFCF4C62A80092B00966B55 /* URLSessionApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionApiService.swift; sourceTree = "<group>"; };
+		0FFCF4C82A8009BF00966B55 /* FlickrEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrEndpoint.swift; sourceTree = "<group>"; };
+		0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +127,7 @@
 		0FFCF4962A7FFE8900966B55 /* ImageSearchTests */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF4CC2A800E4B00966B55 /* Mocks */,
 				0FFCF4972A7FFE8900966B55 /* ImageSearchTests.swift */,
 			);
 			path = ImageSearchTests;
@@ -147,6 +160,7 @@
 		0FFCF4B22A7FFF0100966B55 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF4C12A8008DE00966B55 /* Api */,
 				0FFCF4B52A8003E300966B55 /* Model */,
 				0FFCF4B82A8004A200966B55 /* State */,
 				0FFCF4BB2A80069500966B55 /* ViewModel */,
@@ -176,6 +190,34 @@
 				0FFCF4BC2A80069F00966B55 /* LoadingListViewModel */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0FFCF4BC2A80069F00966B55 /* LoadingListViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0FFCF4BF2A8006B800966B55 /* LoadingListState.swift */,
+				0FFCF4BD2A8006AC00966B55 /* LoadingListViewModel.swift */,
+			);
+			path = LoadingListViewModel;
+			sourceTree = "<group>";
+		};
+		0FFCF4C12A8008DE00966B55 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				0FFCF4C22A8008FA00966B55 /* Endpoint.swift */,
+				0FFCF4C82A8009BF00966B55 /* FlickrEndpoint.swift */,
+				0FFCF4C42A80091100966B55 /* ApiService.swift */,
+				0FFCF4C62A80092B00966B55 /* URLSessionApiService.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		0FFCF4CC2A800E4B00966B55 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0FFCF4CA2A800A9F00966B55 /* MockApiService.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,11 +372,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFCF4C92A8009BF00966B55 /* FlickrEndpoint.swift in Sources */,
+				0FFCF4C32A8008FA00966B55 /* Endpoint.swift in Sources */,
 				0FFCF4C02A8006B800966B55 /* LoadingListState.swift in Sources */,
 				0FFCF4B72A80041900966B55 /* Model.swift in Sources */,
 				0FFCF4812A7FFE8800966B55 /* AppDelegate.swift in Sources */,
 				0FFCF4832A7FFE8800966B55 /* SceneDelegate.swift in Sources */,
+				0FFCF4C72A80092B00966B55 /* URLSessionApiService.swift in Sources */,
 				0FFCF4BA2A8004C100966B55 /* State.swift in Sources */,
+				0FFCF4C52A80091100966B55 /* ApiService.swift in Sources */,
+				0FFCF4BE2A8006AC00966B55 /* LoadingListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFCF4CD2A800EA300966B55 /* MockApiService.swift in Sources */,
 				0FFCF4982A7FFE8900966B55 /* ImageSearchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
