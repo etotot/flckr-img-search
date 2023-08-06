@@ -27,6 +27,12 @@
 		0FFCF4D12A801B8D00966B55 /* MockStateConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4D02A801B8D00966B55 /* MockStateConsumer.swift */; };
 		0FFCF4D42A801E9800966B55 /* ConcurrencyExtras in Frameworks */ = {isa = PBXBuildFile; productRef = 0FFCF4D32A801E9800966B55 /* ConcurrencyExtras */; };
 		0FFCF4D72A802A3700966B55 /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FFCF4D62A802A3700966B55 /* search.json */; };
+		0FFCF4DA2A8033CF00966B55 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4D92A8033CF00966B55 /* AppCoordinator.swift */; };
+		0FFCF4DE2A80340100966B55 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4DD2A80340100966B55 /* ImageSearchViewController.swift */; };
+		0FFCF4E12A8034DC00966B55 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 0FFCF4E02A8034DC00966B55 /* Nuke */; };
+		0FFCF4E32A8034DC00966B55 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0FFCF4E22A8034DC00966B55 /* NukeUI */; };
+		0FFCF4E52A80350100966B55 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E42A80350100966B55 /* PhotoCollectionViewCell.swift */; };
+		0FFCF4E82A803F5200966B55 /* SearchBarStateProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +76,10 @@
 		0FFCF4CE2A80144000966B55 /* ImageSearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchState.swift; sourceTree = "<group>"; };
 		0FFCF4D02A801B8D00966B55 /* MockStateConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStateConsumer.swift; sourceTree = "<group>"; };
 		0FFCF4D62A802A3700966B55 /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
+		0FFCF4D92A8033CF00966B55 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0FFCF4DD2A80340100966B55 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
+		0FFCF4E42A80350100966B55 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarStateProducer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFCF4E12A8034DC00966B55 /* Nuke in Frameworks */,
+				0FFCF4E32A8034DC00966B55 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +176,8 @@
 			children = (
 				0FFCF4CE2A80144000966B55 /* ImageSearchState.swift */,
 				0FFCF4BD2A8006AC00966B55 /* ImageSearchViewModel.swift */,
+				0FFCF4DD2A80340100966B55 /* ImageSearchViewController.swift */,
+				0FFCF4E42A80350100966B55 /* PhotoCollectionViewCell.swift */,
 			);
 			path = ImageSearch;
 			sourceTree = "<group>";
@@ -175,6 +189,8 @@
 				0FFCF4B52A8003E300966B55 /* Model */,
 				0FFCF4B82A8004A200966B55 /* State */,
 				0FFCF4BB2A80069500966B55 /* ViewModel */,
+				0FFCF4D82A8033B300966B55 /* Coordinator */,
+				0FFCF4E62A803F3B00966B55 /* SearchBarStateProducer */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -239,6 +255,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0FFCF4D82A8033B300966B55 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0FFCF4D92A8033CF00966B55 /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0FFCF4E62A803F3B00966B55 /* SearchBarStateProducer */ = {
+			isa = PBXGroup;
+			children = (
+				0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */,
+			);
+			path = SearchBarStateProducer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -256,6 +288,10 @@
 			dependencies = (
 			);
 			name = ImageSearch;
+			packageProductDependencies = (
+				0FFCF4E02A8034DC00966B55 /* Nuke */,
+				0FFCF4E22A8034DC00966B55 /* NukeUI */,
+			);
 			productName = "image-search";
 			productReference = 0FFCF47D2A7FFE8800966B55 /* ImageSearch.app */;
 			productType = "com.apple.product-type.application";
@@ -333,6 +369,7 @@
 			mainGroup = 0FFCF4742A7FFE8800966B55;
 			packageReferences = (
 				0FFCF4D22A801E9800966B55 /* XCRemoteSwiftPackageReference "swift-concurrency-extras" */,
+				0FFCF4DF2A8034DC00966B55 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = 0FFCF47E2A7FFE8800966B55 /* Products */;
 			projectDirPath = "";
@@ -401,11 +438,15 @@
 				0FFCF4C92A8009BF00966B55 /* FlickrEndpoint.swift in Sources */,
 				0FFCF4C32A8008FA00966B55 /* Endpoint.swift in Sources */,
 				0FFCF4C02A8006B800966B55 /* LoadingListState.swift in Sources */,
+				0FFCF4DA2A8033CF00966B55 /* AppCoordinator.swift in Sources */,
 				0FFCF4B72A80041900966B55 /* Model.swift in Sources */,
 				0FFCF4812A7FFE8800966B55 /* AppDelegate.swift in Sources */,
 				0FFCF4832A7FFE8800966B55 /* SceneDelegate.swift in Sources */,
 				0FFCF4C72A80092B00966B55 /* URLSessionApiService.swift in Sources */,
+				0FFCF4E82A803F5200966B55 /* SearchBarStateProducer.swift in Sources */,
 				0FFCF4BA2A8004C100966B55 /* State.swift in Sources */,
+				0FFCF4DE2A80340100966B55 /* ImageSearchViewController.swift in Sources */,
+				0FFCF4E52A80350100966B55 /* PhotoCollectionViewCell.swift in Sources */,
 				0FFCF4C52A80091100966B55 /* ApiService.swift in Sources */,
 				0FFCF4BE2A8006AC00966B55 /* ImageSearchViewModel.swift in Sources */,
 				0FFCF4CF2A80144000966B55 /* ImageSearchState.swift in Sources */,
@@ -754,6 +795,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		0FFCF4DF2A8034DC00966B55 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -761,6 +810,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0FFCF4D22A801E9800966B55 /* XCRemoteSwiftPackageReference "swift-concurrency-extras" */;
 			productName = ConcurrencyExtras;
+		};
+		0FFCF4E02A8034DC00966B55 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0FFCF4DF2A8034DC00966B55 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		0FFCF4E22A8034DC00966B55 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0FFCF4DF2A8034DC00966B55 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

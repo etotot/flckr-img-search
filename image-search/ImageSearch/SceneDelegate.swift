@@ -8,9 +8,24 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    var coordinator: AppCoordinator?
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return } // swiftlint:disable:this unused_optional_binding
+        guard let windowScene = (scene as? UIWindowScene) else {
+            return
+        }
+
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.prefersLargeTitles = true
+
+        coordinator = AppCoordinator(navigationController: navigationController)
+        coordinator?.start()
+
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
 }

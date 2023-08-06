@@ -33,3 +33,9 @@ struct Photo: Codable {
 }
 
 extension Photo: Hashable {}
+
+extension Photo {
+    var url: URL? {
+        return URL(string: "https://live.staticflickr.com/\(server)/\(id)_\(secret).jpg")
+    }
+}
