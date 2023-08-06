@@ -36,6 +36,7 @@
 		0FFCF4EA2A8042DD00966B55 /* MockStateProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */; };
 		0FFCF4ED2A80458000966B55 /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 0FFCF4EC2A80458000966B55 /* AsyncAlgorithms */; };
 		0FFCF4F02A804A2600966B55 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4EF2A804A2600966B55 /* UserDefaultsService.swift */; };
+		0FFCF4F32A804F5E00966B55 /* CollectionActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF4F22A804F5E00966B55 /* CollectionActivityIndicatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		0FFCF4E72A803F5200966B55 /* SearchBarStateProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarStateProducer.swift; sourceTree = "<group>"; };
 		0FFCF4E92A8042DD00966B55 /* MockStateProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStateProducer.swift; sourceTree = "<group>"; };
 		0FFCF4EF2A804A2600966B55 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		0FFCF4F22A804F5E00966B55 /* CollectionActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionActivityIndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				0FFCF4BB2A80069500966B55 /* ViewModel */,
 				0FFCF4D82A8033B300966B55 /* Coordinator */,
 				0FFCF4E62A803F3B00966B55 /* SearchBarStateProducer */,
+				0FFCF4F12A804F3500966B55 /* ReusableViews */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -285,6 +288,14 @@
 				0FFCF4EF2A804A2600966B55 /* UserDefaultsService.swift */,
 			);
 			path = UserDefaultsService;
+			sourceTree = "<group>";
+		};
+		0FFCF4F12A804F3500966B55 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				0FFCF4F22A804F5E00966B55 /* CollectionActivityIndicatorView.swift */,
+			);
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,6 +469,7 @@
 				0FFCF4C02A8006B800966B55 /* LoadingListState.swift in Sources */,
 				0FFCF4DA2A8033CF00966B55 /* AppCoordinator.swift in Sources */,
 				0FFCF4B72A80041900966B55 /* Model.swift in Sources */,
+				0FFCF4F32A804F5E00966B55 /* CollectionActivityIndicatorView.swift in Sources */,
 				0FFCF4812A7FFE8800966B55 /* AppDelegate.swift in Sources */,
 				0FFCF4832A7FFE8800966B55 /* SceneDelegate.swift in Sources */,
 				0FFCF4C72A80092B00966B55 /* URLSessionApiService.swift in Sources */,

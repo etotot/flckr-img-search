@@ -92,9 +92,20 @@ class ImageSearchViewModel: StateProducer, StateConsumer {
             return
         }
 
+        if case let ImgSearch.State.loading(_, context) = _state, context.query == query, context.page == page {
+            return
+        }
+
         loadTask?.cancel()
 
-        let state = _state.toLoading(query: query)
+        var snapshot = _state.snapshot
+
+        if page == 0 {
+            snapshot = .init()
+            snapshot.appendSections([.history, .photos])
+        }
+
+        let state = _state.toLoading(query: query, snapshot: snapshot)
         self._state = state
 
         loadTask = Task {
@@ -107,8 +118,7 @@ class ImageSearchViewModel: StateProducer, StateConsumer {
 
                 try Task.checkCancellation()
 
-                var snapshot = State.SnapshotType()
-                snapshot.appendSections([.photos])
+                var snapshot = _state.snapshot
                 snapshot.appendItems(result.photos.photo.map { ImgSearch.Items.photo($0) })
 
                 searchHistoryService.insert(query: query)

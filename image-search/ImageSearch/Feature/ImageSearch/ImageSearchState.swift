@@ -33,6 +33,10 @@ enum ImgSearch {
 
 extension ImgSearch.State {
     func toLoading(query: String) -> Self {
+        return self.toLoading(query: query, snapshot: snapshot)
+    }
+
+    func toLoading(query: String, snapshot: SnapshotType) -> Self {
         .loading(
             snapshot: snapshot,
             context: .init(

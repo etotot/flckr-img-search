@@ -11,17 +11,22 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
     typealias State = ImgSearch.State
 
     lazy var layout: UICollectionViewCompositionalLayout = {
-        return .init { [unowned self] sectionIndex, layoutEnvironment in
-            let snapshot = self.dataSource.snapshot()
-            let section = snapshot.sectionIdentifiers[sectionIndex]
+        let configuration = UICollectionViewCompositionalLayoutConfiguration()
 
-            switch section {
-            case .history:
-                return self.makeSearchHistorySection(layoutEnvironment: layoutEnvironment)
-            case .photos:
-                return self.makePhotoSection()
-            }
-        }
+        return .init(
+            sectionProvider: { [unowned self] sectionIndex, layoutEnvironment in
+                let snapshot = self.dataSource.snapshot()
+                let section = snapshot.sectionIdentifiers[sectionIndex]
+
+                switch section {
+                case .history:
+                    return self.makeSearchHistorySection(layoutEnvironment: layoutEnvironment)
+                case .photos:
+                    return self.makePhotoSection()
+                }
+            },
+            configuration: configuration
+        )
     }()
 
     lazy var collectionView: UICollectionView = {
@@ -67,6 +72,25 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
             }
         }
 
+        let activityViewRegistration: UICollectionView.SupplementaryRegistration<
+            CollectionActivityIndicatorView
+        > = .init(
+            elementKind: CollectionActivityIndicatorView.ElementKind
+        ) { [unowned self] supplementaryView, _, _ in
+            supplementaryView.startAnimating()
+        }
+
+        dataSource.supplementaryViewProvider = { (collectionView, elementKind, indexPath) in
+            if elementKind == CollectionActivityIndicatorView.ElementKind {
+                return collectionView.dequeueConfiguredReusableSupplementary(
+                    using: activityViewRegistration,
+                    for: indexPath
+                )
+            }
+
+            return nil
+        }
+
         return dataSource
     }()
 
@@ -98,6 +122,14 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
 
     func onStateChanged(to newState: State) async {
         await MainActor.run {
+            let displayLoadingFooter: Bool
+            if case ImgSearch.State.loading = newState {
+                displayLoadingFooter = true
+            } else {
+                displayLoadingFooter = false
+            }
+            updateLayout(displayLoadingFooter: displayLoadingFooter)
+
             let snapshot = newState.snapshot
             dataSource.apply(snapshot)
 
@@ -119,7 +151,20 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
         willDisplay cell: UICollectionViewCell,
         forItemAt indexPath: IndexPath
     ) {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
 
+        guard case ImgSearch.Sections.photos = section else {
+            return
+        }
+
+        guard snapshot.numberOfItems(inSection: section) == indexPath.item + 1 else {
+            return
+        }
+
+        Task {
+            await viewModel?.loadNext()
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -165,6 +210,28 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
         )
 
         return NSCollectionLayoutSection(group: photoGroup)
+    }
+
+    private func updateLayout(displayLoadingFooter: Bool) {
+        guard let layout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout else {
+            return
+        }
+
+        let configuration = UICollectionViewCompositionalLayoutConfiguration()
+        if displayLoadingFooter {
+            let loadingFooter = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: .init(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(40)
+                ),
+                elementKind: CollectionActivityIndicatorView.ElementKind,
+                alignment: .bottom
+            )
+
+            configuration.boundarySupplementaryItems = [loadingFooter]
+        }
+
+        layout.configuration = configuration
     }
 }
 
