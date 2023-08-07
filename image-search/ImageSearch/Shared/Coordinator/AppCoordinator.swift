@@ -24,7 +24,7 @@ class AppCoordinator {
 
         let searchBar = UISearchBar()
         viewController.navigationItem.titleView = searchBar
-        viewController.title = "Image Search"
+        viewController.title = NSLocalizedString("image_search_title", comment: "")
         viewController.showError = { [weak self] in
             self?.showError()
         }
@@ -40,12 +40,16 @@ class AppCoordinator {
 
     @MainActor private func showError() {
         let alertController = UIAlertController(
-            title: "Error",
-            message: "Could not load content",
+            title: NSLocalizedString("image_search_error_title", comment: ""),
+            message: NSLocalizedString("image_search_error_title", comment: ""),
             preferredStyle: .alert
         )
 
-        alertController.addAction(.init(title: "Dismiss", style: .cancel))
+        alertController.addAction(
+            .init(
+                title: NSLocalizedString("image_search_error_dismiss", comment: ""),
+                style: .cancel)
+        )
         imageSearchViewController?.present(alertController, animated: true)
     }
 }

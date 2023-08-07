@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  ImageSearch
+
+  Created by andrey.marshak on 07.08.2023.
+  
+*/
+
+"image_search_title" = "Image Search";
+
+"image_search_error_title" = "Error";
+"image_search_error_details" = "Could not load content";
+"image_search_error_dismiss" = "Dismiss";
