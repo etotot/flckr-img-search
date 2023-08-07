@@ -4,6 +4,10 @@ This is implementation of test assignment.
 
 ## Configuration
 
+- Open workspace with XCode
+- Select correct development team & bundle identifier
+- Add flick API key to `image-search/ImageSearch/Shared/Api/FlickrEndpoint.swift`
+
 ## Data flow
 
 This application is implemented using MVVM+C pattern. Coordinator use is fairly standart but data flow is organized using `AsynSequences` containing `State` entities.
@@ -33,3 +37,5 @@ Due to limited constraints and this app being test assignment I've decided to om
 
 - Better secret management
 - Improve usability of unit-test and remove duplicated checks
+- Add proper middleware support to `ApiService` in order to simplify injection of common data such as api tokens
+- Support for queries in api service mocks
