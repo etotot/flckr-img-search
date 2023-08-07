@@ -138,7 +138,7 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
             switch newState {
             case.loading:
                 break
-            case .error(_, _, _):
+            case .error:
                 self.showError?()
 
                 if let searchBar = navigationItem.titleView as? UISearchBar {
