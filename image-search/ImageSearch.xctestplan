@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "A53B6AD6-0D1F-4899-B670-85E7FEFB4F7B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ImageSearch.xcodeproj",
+      "identifier" : "0FFCF47C2A7FFE8800966B55",
+      "name" : "ImageSearch"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:ImageSearch.xcodeproj",
+        "identifier" : "0FFCF4922A7FFE8900966B55",
+        "name" : "ImageSearchTests"
+      }
+    }
+  ],
+  "version" : 1
+}
