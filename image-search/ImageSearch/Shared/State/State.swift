@@ -8,13 +8,13 @@
 import Foundation
 
 /// Marker protocol to describe abstract State
-protocol State {
+protocol State: Sendable {
 
 }
 
 /// Type that can produce state updates with given `State`
-protocol StateProducer {
-    associatedtype State: ImageSearch.State
+protocol StateProducer: Sendable {
+    associatedtype State: ImageSearch.State & Sendable
     associatedtype `Sequence`: AsyncSequence where Sequence.Element == State
 
     var state: Sequence { get }

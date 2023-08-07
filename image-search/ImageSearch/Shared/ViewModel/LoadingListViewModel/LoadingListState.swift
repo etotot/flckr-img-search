@@ -12,13 +12,13 @@ import Foundation
     import AppKit
 #endif
 
-protocol LoadingListContext {
+protocol LoadingListContext: Sendable {
     var hasMore: Bool { get }
 }
 
 enum LoadingListState<
-    SectionIdentifier: Hashable,
-    ItemIdentifier: Hashable,
+    SectionIdentifier: Hashable & Sendable,
+    ItemIdentifier: Hashable & Sendable,
     Context: LoadingListContext,
     Error: Swift.Error
 >: State {

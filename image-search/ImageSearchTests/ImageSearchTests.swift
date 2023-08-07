@@ -27,7 +27,7 @@ final class ImageSearchTests: XCTestCase {
         let task = Task {
             let spy = StateConsumerSpy<ImgSearch.State>()
 
-            for await state in viewModel.state {
+            for await state in await viewModel.state {
                 spy.consume(state: state)
 
                 if case ImgSearch.State.initial = state { break }
@@ -74,7 +74,7 @@ final class ImageSearchTests: XCTestCase {
         let task = Task {
             let spy = StateConsumerSpy<ImgSearch.State>()
 
-            for await state in viewModel.state {
+            for await state in await viewModel.state {
                 spy.consume(state: state)
                 if case ImgSearch.State.loaded = state { break }
             }
@@ -120,7 +120,7 @@ final class ImageSearchTests: XCTestCase {
         let task = Task {
             let spy = StateConsumerSpy<ImgSearch.State>()
 
-            for await state in viewModel.state {
+            for await state in await viewModel.state {
                 spy.consume(state: state)
                 if case ImgSearch.State.error = state { break }
             }
@@ -170,7 +170,7 @@ final class ImageSearchTests: XCTestCase {
         let task = Task {
             let spy = StateConsumerSpy<ImgSearch.State>()
 
-            for await state in viewModel.state {
+            for await state in await viewModel.state {
                 spy.consume(state: state)
                 if case ImgSearch.State.loaded = state { break }
             }

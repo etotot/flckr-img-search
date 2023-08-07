@@ -7,7 +7,7 @@
 
 import Foundation
 
-class URLSessionApiService: ApiService {
+final class URLSessionApiService: ApiService {
     enum Error: Swift.Error {
         case invalidRequest(any Endpoint)
         case unexpectedResponseType

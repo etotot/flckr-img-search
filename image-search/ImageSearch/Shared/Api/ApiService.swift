@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ApiService {
+protocol ApiService: Sendable {
     func call<E: Endpoint>(
         _ endpoint: E
     ) async throws -> E.Success

@@ -111,8 +111,8 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
             return
         }
 
-        observation = Task { [stateStream = viewModel.state, weak self] in
-            for await state in stateStream {
+        observation = Task { [viewModel = viewModel, weak self] in
+            for await state in await viewModel.state {
                 await self?.onStateChanged(to: state)
             }
         }

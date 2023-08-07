@@ -12,7 +12,7 @@ enum HTTPMethod: String {
 }
 
 /// Any endpoint that can be used to call remote service and receive decodable response
-protocol Endpoint {
+protocol Endpoint: Sendable {
     associatedtype Success: Decodable
 
     var path: String { get }

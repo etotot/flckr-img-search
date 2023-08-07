@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol SearchHistoryService {
+protocol SearchHistoryService: Sendable {
     var queries: [String] { get }
     func insert(query: String)
 }
 
-class UserDefaultsSearchHistoryService: SearchHistoryService {
+final class UserDefaultsSearchHistoryService: SearchHistoryService {
     private static let key = "SearchHistory"
 
     private let defaults = UserDefaults()

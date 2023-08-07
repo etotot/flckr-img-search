@@ -15,7 +15,7 @@ class AppCoordinator {
         self.navigationController = navigationController
     }
 
-    func start() {
+    @MainActor func start() {
         let apiService = URLSessionApiService(baseURL: URL(string: "https://www.flickr.com")!)
 
         let viewController = ImageSearchViewController()
