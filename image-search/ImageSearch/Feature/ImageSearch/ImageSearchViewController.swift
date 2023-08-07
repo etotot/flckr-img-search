@@ -94,6 +94,8 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
         return dataSource
     }()
 
+    var showError: (() -> Void)?
+
     private var observation: Task<Void, Never>?
     var viewModel: ImageSearchViewModel?
 
@@ -136,6 +138,12 @@ class ImageSearchViewController: UIViewController, UICollectionViewDelegate, Sta
             switch newState {
             case.loading:
                 break
+            case .error(_, _, _):
+                self.showError?()
+
+                if let searchBar = navigationItem.titleView as? UISearchBar {
+                    searchBar.text = newState.context.query
+                }
             default:
                 if let searchBar = navigationItem.titleView as? UISearchBar {
                     searchBar.text = newState.context.query

@@ -25,6 +25,9 @@ class AppCoordinator {
         let searchBar = UISearchBar()
         viewController.navigationItem.titleView = searchBar
         viewController.title = "Image Search"
+        viewController.showError = { [weak self] in
+            self?.showError()
+        }
 
         viewController.viewModel = .init(
             apiService: apiService,
@@ -33,5 +36,16 @@ class AppCoordinator {
         )
 
         self.imageSearchViewController = viewController
+    }
+
+    @MainActor private func showError() {
+        let alertController = UIAlertController(
+            title: "Error",
+            message: "Could not load content",
+            preferredStyle: .alert
+        )
+
+        alertController.addAction(.init(title: "Dismiss", style: .cancel))
+        imageSearchViewController?.present(alertController, animated: true)
     }
 }
